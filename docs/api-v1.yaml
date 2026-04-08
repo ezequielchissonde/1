@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: ASAMMPLAY API
+  version: 1.0.0
+  description: API inicial para o MVP do super app ASAMMPLAY.
+servers:
+  - url: https://api.asammplay.com/v1
+
+tags:
+  - name: Auth
+  - name: Users
+  - name: Community
+  - name: Links
+  - name: Notifications
+  - name: Search
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Cadastro de usuário com email/senha
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Usuário criado
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login com email/senha
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login realizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Renovar access token
+      responses:
+        '200':
+          description: Token renovado
+  /users/me:
+    get:
+      tags: [Users]
+      summary: Retorna o perfil do usuário autenticado
+      responses:
+        '200':
+          description: Perfil atual
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    patch:
+      tags: [Users]
+      summary: Atualiza perfil
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Perfil atualizado
+  /community/posts:
+    get:
+      tags: [Community]
+      summary: Lista posts do feed
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Lista de posts
+    post:
+      tags: [Community]
+      summary: Cria post
+      responses:
+        '201':
+          description: Post criado
+  /links:
+    get:
+      tags: [Links]
+      summary: Lista links externos por categoria
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de links
+  /notifications/devices:
+    post:
+      tags: [Notifications]
+      summary: Registra token do dispositivo para push
+      responses:
+        '204':
+          description: Token registrado
+  /search:
+    get:
+      tags: [Search]
+      summary: Busca global (posts + links)
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resultado de busca
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        avatarUrl:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    UpdateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        avatarUrl:
+          type: string
