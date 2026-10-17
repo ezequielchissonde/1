@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASAMMPLAY TECH | Hub de Soluções</title>
+  <meta name="description" content="Landing única com seções âncora por serviço para divulgação segmentada, cross-sell e upsell." />
+  <style>
+    :root {
+      --bg: #071b36;
+      --bg-soft: #f2f7fc;
+      --card: #ffffff;
+      --line: #d9e5f1;
+      --text: #0f2440;
+      --accent: #3cc9ff;
+      --accent-2: #745bff;
+      --ok: #1a9b5a;
+      --danger: #ef3a3a;
+      --radius: 14px;
+      --shadow: 0 10px 24px rgba(15, 36, 64, 0.08);
+      --max: 1140px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.5;
+    }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+    .hero {
+      background: radial-gradient(circle at 90% 10%, #1e7aa1 0%, rgba(30,122,161,0) 36%),
+                  linear-gradient(145deg, #071b36 0%, #0b2f5b 100%);
+      color: #fff;
+      padding: 18px 0 64px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 0 10px;
+    }
+
+    .brand { font-weight: 800; letter-spacing: .02em; }
+
+    .cta-mini {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.4);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .kicker {
+      color: #9adfff;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    h1 { font-size: clamp(28px, 5vw, 48px); margin: 10px 0; line-height: 1.1; }
+
+    .hero p { margin: 0 0 16px; color: #d7e9ff; }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #053142; }
+    .btn-outline { border: 1px solid #79ddff; color: #79ddff; background: transparent; }
+    .btn-dark { background: #0f2440; color: #fff; }
+    .btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+
+    .hero-box {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .anchor-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .anchor-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .anchor-row a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      background: #eef5fd;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+    }
+
+    .anchor-row a.active { background: #d9f4ff; border-color: #a9e6ff; }
+
+    section { padding: 56px 0; scroll-margin-top: 78px; }
+    section.alt { background: var(--bg-soft); }
+    h2 { font-size: clamp(24px, 3vw, 34px); margin: 0 0 8px; }
+    .lead { margin: 0 0 18px; color: #51657f; }
+
+    .grid-3 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .grid-2 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 { margin-top: 0; margin-bottom: 10px; }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px 12px;
+    }
+    details summary { cursor: pointer; font-weight: 700; }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pill-ok { background: #e9fff4; color: var(--ok); }
+    .pill-warn { background: #fff2f2; color: var(--danger); }
+
+    .cloud-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+    }
+
+    .cloud-links a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      color: var(--text);
+      background: #fff;
+    }
+
+    .vendor {
+      border-left: 4px solid var(--accent-2);
+      scroll-margin-top: 90px;
+    }
+
+    .slider-wrap { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+    .slider-track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      padding: 12px;
+      animation: marquee 20s linear infinite;
+    }
+    .slider-item {
+      border: 1px solid var(--line);
+      background: #f9fbff;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 700;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-40%); }
+    }
+
+    footer {
+      background: var(--bg);
+      color: #fff;
+      text-align: center;
+      padding: 24px 16px 36px;
+      margin-top: 24px;
+    }
+
+    .small { font-size: 13px; opacity: .85; }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="topo">
+    <div class="container">
+      <div class="top">
+        <div class="brand">ASAMMPLAY TECH</div>
+        <a class="cta-mini" href="#contato">Falar com vendas</a>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">Landing única com URL por seção</div>
+          <h1>Venda por interesse e aumente <br/>cross-sell + upsell</h1>
+          <p>
+            Você divulga a página completa ou envia links diretos por problema do lead, como
+            <strong>/#aws</strong>, <strong>/#certificados</strong> e <strong>/#comments</strong>.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#servicos">Ver serviços</a>
+            <a class="btn btn-outline" href="#cloud">Ir para Cloud</a>
+          </div>
+        </div>
+
+        <aside class="hero-box">
+          <strong>Compatível com Builderall</strong>
+          <p class="small">
+            Estrutura em arquivo único (HTML + CSS + JS), sem dependências externas de framework.
+            Pronto para colar no editor HTML da Builderall.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav class="anchor-nav" aria-label="Navegação por âncoras">
+    <div class="container anchor-row">
+      <a href="#twim">TWIM</a>
+      <a href="#cloud">Cloud</a>
+      <a href="#aws">AWS</a>
+      <a href="#google-cloud">Google Cloud</a>
+      <a href="#microsoft-cloud">Microsoft</a>
+      <a href="#certificados">Certificados</a>
+      <a href="#assinatura">Assinaturas</a>
+      <a href="#comments">COMMENTS</a>
+    </div>
+  </nav>
+
+  <main id="servicos" class="container">
+    <section id="twim">
+      <h2>A) TWIM — Agendamentos e Prontuários</h2>
+      <p class="lead">Página existente conectada com sinopse expansível (+/-) para contexto rápido.</p>
+
+      <details open>
+        <summary>Sinopse TWIM (clique para expandir/recolher)</summary>
+        <p>
+          Organize agenda, prontuário eletrônico e histórico clínico em uma interface única,
+          reduzindo retrabalho e melhorando a experiência de atendimento.
+        </p>
+      </details>
+    </section>
+
+    <section id="cloud" class="alt">
+      <h2>B) Cloud — Página Base + 3 seções dedicadas</h2>
+      <p class="lead">Aqui já deixamos Cloud dividido em: AWS, Google Cloud e Microsoft, cada um com âncora própria.</p>
+
+      <div class="cloud-links">
+        <a href="#aws">Abrir seção AWS</a>
+        <a href="#google-cloud">Abrir seção Google Cloud</a>
+        <a href="#microsoft-cloud">Abrir seção Microsoft</a>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="pill pill-ok">URL dedicada</span>
+          <h3>AWS</h3>
+          <p>Para workloads críticos, servidores e aplicações com foco em disponibilidade.</p>
+          <a class="btn btn-dark" href="https://ezequielchissonde-primeiro-ambiente-aws-copy-copy.site.builderallsite.com/" target="_blank" rel="noreferrer">Página externa AWS</a>
+        </article>
+
+        <article class="card">
+          <span class="pill pill-ok">URL dedicada</span>
+          <h3>Google Cloud</h3>
+          <p>Para apps modernos, escalabilidade e análise de dados com operação simplificada.</p>
+          <a class="btn btn-dark" href="https://ezequielchissonde-cloudecybersecurity-copy.site.builderallsite.com/" target="_blank" rel="noreferrer">Página base Cloud</a>
+        </article>
+
+        <article class="card">
+          <span class="pill pill-warn">Em construção</span>
+          <h3>Microsoft Cloud</h3>
+          <p>Para empresas que já usam ecossistema Microsoft e buscam integração corporativa.</p>
+          <a class="btn btn-dark" href="#" aria-disabled="true">Página externa em preparo</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="aws" class="vendor">
+      <h2>AWS (seção individual)</h2>
+      <p class="lead">URL para campanha direta: <strong>#aws</strong>.</p>
+      <div class="grid-2">
+        <article class="card"><h3>Oferta inicial</h3><p>Primeiro ambiente em nuvem com segurança, backup e suporte.</p></article>
+        <article class="card"><h3>CTA</h3><a class="btn btn-primary" href="https://ezequielchissonde-primeiro-ambiente-aws-copy-copy.site.builderallsite.com/" target="_blank" rel="noreferrer">Começar na AWS</a></article>
+      </div>
+    </section>
+
+    <section id="google-cloud" class="vendor">
+      <h2>Google Cloud (seção individual)</h2>
+      <p class="lead">URL para campanha direta: <strong>#google-cloud</strong>.</p>
+      <div class="grid-2">
+        <article class="card"><h3>Oferta inicial</h3><p>Recursos para aplicações web, APIs e armazenamento escalável.</p></article>
+        <article class="card"><h3>CTA</h3><a class="btn btn-primary" href="https://ezequielchissonde-cloudecybersecurity-copy.site.builderallsite.com/" target="_blank" rel="noreferrer">Começar no Google Cloud</a></article>
+      </div>
+    </section>
+
+    <section id="microsoft-cloud" class="vendor">
+      <h2>Microsoft Cloud (seção individual)</h2>
+      <p class="lead">URL para campanha direta: <strong>#microsoft-cloud</strong>.</p>
+      <div class="grid-2">
+        <article class="card"><h3>Oferta inicial</h3><p>Ambientes empresariais com integração Microsoft e governança.</p></article>
+        <article class="card"><h3>CTA</h3><a class="btn btn-dark" href="#" aria-disabled="true">Publicar página Microsoft</a></article>
+      </div>
+    </section>
+
+    <section id="certificados" class="alt">
+      <h2>C) Certificados Digitais</h2>
+      <p class="lead">TKS + Certwow e estrutura pronta para novos fornecedores.</p>
+      <div class="grid-2">
+        <article class="card">
+          <h3>TKS</h3>
+          <p>Emissão assistida com suporte remoto.</p>
+          <a class="btn btn-primary" href="https://ezequielchissonde-tks-copy.site.builderallsite.com/" target="_blank" rel="noreferrer">Ir para TKS</a>
+        </article>
+        <article class="card">
+          <h3>Certwow</h3>
+          <p>Área preparada para catálogos futuros.</p>
+          <a class="btn btn-dark" href="#" aria-disabled="true">Página em preparo</a>
+        </article>
+      </div>
+
+      <h3>Slider pronto para parceiros futuros</h3>
+      <div class="slider-wrap" aria-label="Slider de parceiros">
+        <div class="slider-track">
+          <div class="slider-item">TKS</div>
+          <div class="slider-item">CERTWOW</div>
+          <div class="slider-item">PARCEIRO 03</div>
+          <div class="slider-item">PARCEIRO 04</div>
+          <div class="slider-item">PARCEIRO 05</div>
+          <div class="slider-item">PARCEIRO 06</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="assinatura">
+      <h2>D) Assinaturas Eletrônicas</h2>
+      <p class="lead">Seção preparada para Certwow e outros revendedores.</p>
+      <div class="grid-2">
+        <article class="card"><h3>Certwow Sign</h3><p>Assinatura eletrônica com validade jurídica e trilha de auditoria.</p></article>
+        <article class="card"><h3>Outros fornecedores</h3><p>Bloco pronto para adicionar novas páginas sem redesenho.</p></article>
+      </div>
+    </section>
+
+    <section id="comments" class="alt">
+      <h2>E) COMMENTS — Reputação Digital</h2>
+      <p class="lead">Reformulação focada em prova social, resposta ativa e crescimento de conversão.</p>
+      <ul>
+        <li>Centralização de avaliações em múltiplos canais.</li>
+        <li>Monitoramento contínuo da reputação digital.</li>
+        <li>Base para campanhas de remarketing por interesse de seção.</li>
+      </ul>
+      <a class="btn btn-primary" href="https://comments.asammplay.org/" target="_blank" rel="noreferrer">Acessar COMMENTS</a>
+    </section>
+  </main>
+
+  <footer id="contato">
+    <p><strong>Status:</strong> V1 Builderall (HTML+CSS+JS em arquivo único) pronta para sua validação.</p>
+    <p class="small">© 2026 ASAMMPLAY TECH</p>
+  </footer>
+
+  <script>
+    (function () {
+      const links = Array.from(document.querySelectorAll('.anchor-row a'));
+      const sections = links
+        .map((a) => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
+      function setActiveByHash() {
+        const hash = window.location.hash || '#topo';
+        links.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === hash);
+        });
+      }
+
+      function setActiveByScroll() {
+        let current = '#topo';
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 120) current = '#' + section.id;
+        }
+        links.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === current);
+        });
+      }
+
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
+          setTimeout(setActiveByHash, 10);
+        });
+      });
+
+      window.addEventListener('hashchange', setActiveByHash);
+      window.addEventListener('scroll', setActiveByScroll, { passive: true });
+
+      setActiveByHash();
+      setActiveByScroll();
+    })();
+  </script>
+</body>
+</html>
